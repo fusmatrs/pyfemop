@@ -170,14 +170,7 @@ class MooseOptimisationRun():
                     #    filtered_data_list.append(self._data_filter.run_filter(spatial_data))
                     #spatial_data_list = filtered_data_list
                     # New  runs parallel
-                    n_threads = mp.cpu_count() - 1#len(spatial_data_list)
-
-                    with mp.Pool(n_threads) as pool:
-                        processes = []
-                        for data in spatial_data_list:
-                            processes.append(pool.apply_async(self._data_filter.run_filter, (data,))) # tuple is important, otherwise it unpacks strings for some reason
-                        f_list=[pp.get() for pp in processes]
-                    spatial_data_list = f_list
+                    spatial_data_list = self._data_filter.run_filter(spatial_data_list)
                 print('            Calculating Objectives              ')
                 print('------------------------------------------------')
 
