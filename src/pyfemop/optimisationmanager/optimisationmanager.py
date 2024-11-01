@@ -103,6 +103,16 @@ class MooseOptimisationRun():
         Args:
             num_its (int): _description_
         """
+        print('************************************************')
+        print('             <<   Run Start   >>                ')
+        print('------------------------------------------------')
+        print('              All Input Parameters              ')
+
+        for i,mod in enumerate(self._herd._modifiers):
+            print('Modifier {}'.format(i+1))
+            print('-----------')
+            for key in mod._vars:
+                print('{} = {}'.format(key,mod._vars[key]))
         for n_gen in range(num_its):
             #Check if termination criteria has been met. 
             if not self._algorithm.has_next():
